@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionario Interactivo: Gráficos de Cinemática PAES</title>
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
         :root {
@@ -542,7 +554,7 @@
         p24: "Cruzar el eje horizontal significa que $v = 0$ (se detiene momentáneamente) y cambia el sentido de su movimiento.",
         p25: "En la PAES, la aceleración se estudia de manera uniforme por tramos, representada mediante líneas rectas horizontales.",
         p26: "Una línea vertical implicaría un cambio de velocidad en tiempo cero, lo que exigiría una aceleración infinita, lo cual es físicamente imposible.",
-        p27: "Áreas: Tramo 1 = $\\frac{3 \\times 6}{2} = 9\\text{ m}$; Tramo 2 = $2 \\times 6 = 12\\text{ m}$; Tramo 3 = $\\frac{1 \\times 6}{2} = 3\\text{ m}$. Distancia total $= 24\\text{ m}$. Velocidad promedio $= \\frac{24}{6} = 4.0\\text{ m/s}$.",
+        p27: "Áreas: Tramo 1 = $\\frac{3 \\times 6}{2} = 9\\text{ m}$; Tramo 2 = $2 \\times 6 = 12\\text{ m}$; Tramo 3 = $\\text{Área}_3 = \\frac{1 \\times 6}{2} = 3\\text{ m}$. Distancia total $= 24\\text{ m}$. Velocidad promedio $= \\frac{24}{6} = 4.0\\text{ m/s}$.",
         p28: "En la altura máxima el objeto se detiene instantáneamente ($v = 0$). En un gráfico posición-tiempo, la pendiente cero se refleja como una curva perfectamente horizontal en su vértice superior."
     };
 
@@ -588,8 +600,8 @@
         }
 
         // Forzar a MathJax a procesar el contenido recién insertado en los feedbacks dinámicos
-        if (window.MathJax) {
-            MathJax.typesetPromise();
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetPromise().catch((err) => console.log(err));
         }
     }
 </script>
