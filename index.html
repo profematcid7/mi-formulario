@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Interactivo: Gráficos de Cinemática PAES</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-hover: #1557b0;
+            --success: #2e7d32;
+            --success-bg: #e8f5e9;
+            --error: #c62828;
+            --error-bg: #ffebee;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p.subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .section-title {
+            background: #e3f2fd;
+            color: var(--primary);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            font-size: 16px;
+        }
+
+        .question-box {
+            background: #fafbfc;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .question-box.correct-answered {
+            border-color: var(--success);
+            background-color: var(--success-bg);
+        }
+
+        .question-box.incorrect-answered {
+            border-color: var(--error);
+            background-color: var(--error-bg);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .options-list label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .options-list label:hover {
+            background: #f0f4f8;
+        }
+
+        .options-list input {
+            margin-right: 10px;
+        }
+
+        .feedback {
+            font-size: 14px;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background-color: #c8e6c9;
+            color: var(--success);
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect {
+            background-color: #ffcdd2;
+            color: var(--error);
+            border: 1px solid #ef9a9a;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button.btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        #resultadoFinal {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Cuestionario Interactivo: Gráficos de Cinemática (PAES Física)</h1>
+        <p class="subtitle">Selecciona tu respuesta en cada pregunta. Si te equivocas, el sistema te indicará por qué y podrás cambiarla antes de volver a enviar.</p>
+    </header>
+
+    <form id="quizForm">
+
+        <div class="section-title">I. Preguntas Básicas (1 a 16)</div>
+
+        <!-- Pregunta 1 -->
+        <div class="question-box" id="qbox-1">
+            <div class="question-text">1. ¿Qué magnitud física se representa convencionalmente en el eje horizontal (eje X) en los gráficos de cinemática para la PAES?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p1" value="A"> A) La velocidad</label>
+                <label><input type="radio" name="p1" value="B"> B) El tiempo</label>
+                <label><input type="radio" name="p1" value="C"> C) La posición</label>
+                <label><input type="radio" name="p1" value="D"> D) La aceleración</label>
+            </div>
+            <div id="feedback1" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="question-box" id="qbox-2">
+            <div class="question-text">2. ¿Qué significa que la posición de un cuerpo se represente como una línea horizontal paralela al eje del tiempo en un gráfico de posición en función del tiempo ($x$ v/s $t$)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p2" value="A"> A) Que el cuerpo se mueve con velocidad constante.</label>
+                <label><input type="radio" name="p2" value="B"> B) Que el cuerpo tiene una aceleración constante.</label>
+                <label><input type="radio" name="p2" value="C"> C) Que el cuerpo está detenido (su posición no cambia y su velocidad es cero).</label>
+                <label><input type="radio" name="p2" value="D"> D) Que el cuerpo se desplaza en sentido negativo.</label>
+            </div>
+            <div id="feedback2" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question-box" id="qbox-3">
+            <div class="question-text">3. ¿Cuál de las siguientes opciones describe correctamente la representación gráfica de la posición en función del tiempo para un Movimiento Rectilíneo Uniforme (MRU)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p3" value="A"> A) Una línea horizontal paralela al eje del tiempo.</label>
+                <label><input type="radio" name="p3" value="B"> B) Una línea recta diagonal (ascendente o descendente).</label>
+                <label><input type="radio" name="p3" value="C"> C) Una curva parabólica que se vuelve más empinada.</label>
+                <label><input type="radio" name="p3" value="D"> D) Una línea vertical paralela al eje de la posición.</label>
+            </div>
+            <div id="feedback3" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question-box" id="qbox-4">
+            <div class="question-text">4. En un gráfico de velocidad en función del tiempo ($v$ v/s $t$) para un MRU, ¿cómo se representa la velocidad del móvil?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p4" value="A"> A) Como una línea recta diagonal.</label>
+                <label><input type="radio" name="p4" value="B"> B) Como una curva parabólica.</label>
+                <label><input type="radio" name="p4" value="C"> C) Como una línea recta horizontal (paralela al eje del tiempo).</label>
+                <label><input type="radio" name="p4" value="D"> D) Como una línea vertical.</label>
+            </div>
+            <div id="feedback4" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question-box" id="qbox-5">
+            <div class="question-text">5. Si la velocidad de un cuerpo se mantiene constante a lo largo del tiempo, ¿cuál es el valor de su aceleración?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p5" value="A"> A) Constante y distinta de cero.</label>
+                <label><input type="radio" name="p5" value="B"> B) Es exactamente igual a cero.</label>
+                <label><input type="radio" name="p5" value="C"> C) Aumenta linealmente a cada segundo.</label>
+                <label><input type="radio" name="p5" value="D"> D) Disminuye de forma cuadrática.</label>
+            </div>
+            <div id="feedback5" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question-box" id="qbox-6">
+            <div class="question-text">6. ¿Qué información física se obtiene al calcular la PENDIENTE de la recta en un gráfico de posición en función del tiempo ($x$ v/s $t$)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p6" value="A"> A) La distancia recorrida.</label>
+                <label><input type="radio" name="p6" value="B"> B) La aceleración del móvil.</label>
+                <label><input type="radio" name="p6" value="C"> C) El tiempo de movimiento.</label>
+                <label><input type="radio" name="p6" value="D"> D) La velocidad del móvil.</label>
+            </div>
+            <div id="feedback6" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question-box" id="qbox-7">
+            <div class="question-text">7. ¿Qué información física se obtiene al calcular la PENDIENTE de la recta en un gráfico de velocidad en función del tiempo ($v$ v/s $t$)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p7" value="A"> A) La posición inicial.</label>
+                <label><input type="radio" name="p7" value="B"> B) El desplazamiento.</label>
+                <label><input type="radio" name="p7" value="C"> C) La aceleración del móvil.</label>
+                <label><input type="radio" name="p7" value="D"> D) La velocidad promedio.</label>
+            </div>
+            <div id="feedback7" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question-box" id="qbox-8">
+            <div class="question-text">8. ¿Qué magnitud física representa el ÁREA bajo la curva en un gráfico de velocidad en función del tiempo ($v$ v/s $t$)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p8" value="A"> A) La aceleración del móvil.</label>
+                <label><input type="radio" name="p8" value="B"> B) El desplazamiento o distancia recorrida.</label>
+                <label><input type="radio" name="p8" value="C"> C) El tiempo transcurrido.</label>
+                <label><input type="radio" name="p8" value="D"> D) La velocidad promedio.</label>
+            </div>
+            <div id="feedback8" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="question-box" id="qbox-9">
+            <div class="question-text">9. ¿Qué indica exclusivamente el signo algebraico (positivo o negativo) de la velocidad en un ejercicio de física?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p9" value="A"> A) Si el cuerpo se mueve rápido o lento.</label>
+                <label><input type="radio" name="p9" value="B"> B) El sentido del movimiento respecto al sistema de referencia elegido.</label>
+                <label><input type="radio" name="p9" value="C"> C) Si el movimiento es acelerado (MRUA) o retardado (MRUR).</label>
+                <label><input type="radio" name="p9" value="D"> D) La magnitud de la aceleración constante.</label>
+            </div>
+            <div id="feedback9" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="question-box" id="qbox-10">
+            <div class="question-text">10. En un gráfico de velocidad en función del tiempo ($v$ v/s $t$), si la recta se ALEJA del eje horizontal (eje X del tiempo), ¿de qué tipo de movimiento se trata?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p10" value="A"> A) Movimiento Rectilíneo Uniformemente Retardado (MRUR)</label>
+                <label><input type="radio" name="p10" value="B"> B) Movimiento Rectilíneo Uniforme (MRU)</label>
+                <label><input type="radio" name="p10" value="C"> C) Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</label>
+                <label><input type="radio" name="p10" value="D"> D) Un cuerpo en reposo absoluto</label>
+            </div>
+            <div id="feedback10" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 11 -->
+        <div class="question-box" id="qbox-11">
+            <div class="question-text">11. En un gráfico de velocidad en función del tiempo ($v$ v/s $t$), si la recta se ACERCA al eje horizontal (eje X del tiempo), ¿de qué tipo de movimiento se trata?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p11" value="A"> A) Movimiento Rectilíneo Uniformemente Acelerado (MRUA)</label>
+                <label><input type="radio" name="p11" value="B"> B) Movimiento Rectilíneo Uniformemente Retardado (MRUR)</label>
+                <label><input type="radio" name="p11" value="C"> C) Movimiento Rectilíneo Uniforme (MRU)</label>
+                <label><input type="radio" name="p11" value="D"> D) Movimiento sin gravedad</label>
+            </div>
+            <div id="feedback11" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 12 -->
+        <div class="question-box" id="qbox-12">
+            <div class="question-text">12. ¿Qué forma geométrica tiene la representación de la posición en función del tiempo ($x$ v/s $t$) para un movimiento con aceleración constante (MRUV)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p12" value="A"> A) Una línea recta diagonal.</label>
+                <label><input type="radio" name="p12" value="B"> B) Una línea recta horizontal.</label>
+                <label><input type="radio" name="p12" value="C"> C) Una parábola (curva cuadrática).</label>
+                <label><input type="radio" name="p12" value="D"> D) Una circunferencia.</label>
+            </div>
+            <div id="feedback12" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 13 -->
+        <div class="question-box" id="qbox-13">
+            <div class="question-text">13. Si un objeto se desplaza con una velocidad de $+5	ext{ m/s}$ y experimenta una aceleración de $+2	ext{ m/s}^2$, ¿cuál es el comportamiento de su movimiento?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p13" value="A"> A) Es un MRUR (va disminuyendo su rapidez).</label>
+                <label><input type="radio" name="p13" value="B"> B) Es un MRU (velocidad constante).</label>
+                <label><input type="radio" name="p13" value="C"> C) Es un MRUA (va aumentando su rapidez).</label>
+                <label><input type="radio" name="p13" value="D"> D) El cuerpo está detenido.</label>
+            </div>
+            <div id="feedback13" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 14 -->
+        <div class="question-box" id="qbox-14">
+            <div class="question-text">14. Si un objeto tiene una velocidad de $+10	ext{ m/s}$ y una aceleración de $-2	ext{ m/s}^2$, ¿qué le ocurre a su rapidez a cada segundo?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p14" value="A"> A) Aumenta linealmente a razón de $2	ext{ m/s}$ cada segundo.</label>
+                <label><input type="radio" name="p14" value="B"> B) Se mantiene constante en $10	ext{ m/s}$.</label>
+                <label><input type="radio" name="p14" value="C"> C) Disminuye a razón de $2	ext{ m/s}$ cada segundo (frena).</label>
+                <label><input type="radio" name="p14" value="D"> D) Disminuye de forma cuadrática instantáneamente a cero.</label>
+            </div>
+            <div id="feedback14" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 15 -->
+        <div class="question-box" id="qbox-15">
+            <div class="question-text">15. ¿Qué representa una curva que se va haciendo cada vez más empinada (es decir, cuya pendiente se vuelve más vertical) en un gráfico de posición en función del tiempo ($x$ v/s $t$)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p15" value="A"> A) Un movimiento rectilíneo uniforme (MRU).</label>
+                <label><input type="radio" name="p15" value="B"> B) Un movimiento uniformemente acelerado (MRUA).</label>
+                <label><input type="radio" name="p15" value="C"> C) Un movimiento uniformemente retardado (MRUR).</label>
+                <label><input type="radio" name="p15" value="D"> D) Un cuerpo en reposo.</label>
+            </div>
+            <div id="feedback15" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 16 -->
+        <div class="question-box" id="qbox-16">
+            <div class="question-text">16. ¿Por qué un gráfico de posición en función del tiempo ($x$ v/s $t$) NO debe interpretarse como un "GPS" o una foto satelital del camino recorrido por el móvil?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p16" value="A"> A) Porque el gráfico solo es un ordenamiento matemático abstracto de los datos de posición y tiempo en una sola dimensión.</label>
+                <label><input type="radio" name="p16" value="B"> B) Porque los gráficos en física solo sirven para representar trayectorias en tres dimensiones.</label>
+                <label><input type="radio" name="p16" value="C"> C) Porque los gráficos de posición solo miden la velocidad.</label>
+                <label><input type="radio" name="p16" value="D"> D) Porque los gráficos representan la velocidad angular y no la lineal.</label>
+            </div>
+            <div id="feedback16" class="feedback"></div>
+        </div>
+
+
+        <div class="section-title">II. Preguntas Intermedias (17 a 26)</div>
+
+        <!-- Pregunta 17 -->
+        <div class="question-box" id="qbox-17">
+            <div class="question-text">17. Un móvil inicia su movimiento desde el reposo ($v=0	ext{ m/s}$) en $t=0	ext{ s}$ y acelera uniformemente hasta alcanzar una velocidad de $10	ext{ m/s}$ a los $5	ext{ s}$. ¿Cuál es el valor de su aceleración?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p17" value="A"> A) $0.5	ext{ m/s}^2$</label>
+                <label><input type="radio" name="p17" value="B"> B) $2.0	ext{ m/s}^2$</label>
+                <label><input type="radio" name="p17" value="C"> C) $5.0	ext{ m/s}^2$</label>
+                <label><input type="radio" name="p17" value="D"> D) $10.0	ext{ m/s}^2$</label>
+            </div>
+            <div id="feedback17" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 18 -->
+        <div class="question-box" id="qbox-18">
+            <div class="question-text">18. En un gráfico de velocidad en función del tiempo ($v$ v/s $t$), se observa una línea recta horizontal con un valor de $4	ext{ m/s}$ constante durante un intervalo de $3	ext{ s}$. ¿Qué distancia recorrió el móvil en ese intervalo?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p18" value="A"> A) $1.33	ext{ m}$</label>
+                <label><input type="radio" name="p18" value="B"> B) $7.0	ext{ m}$</label>
+                <label><input type="radio" name="p18" value="C"> C) $12.0	ext{ m}$</label>
+                <label><input type="radio" name="p18" value="D"> D) $16.0	ext{ m}$</label>
+            </div>
+            <div id="feedback18" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 19 -->
+        <div class="question-box" id="qbox-19">
+            <div class="question-text">19. Un ciclista inicia su movimiento desde el reposo y aumenta su velocidad de manera uniforme hasta alcanzar $8	ext{ m/s}$ en un tiempo de $4	ext{ s}$. ¿Cuál fue su desplazamiento total representado en el gráfico de velocidad-tiempo?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p19" value="A"> A) $32.0	ext{ m}$</label>
+                <label><input type="radio" name="p19" value="B"> B) $16.0	ext{ m}$</label>
+                <label><input type="radio" name="p19" value="C"> C) $8.0	ext{ m}$</label>
+                <label><input type="radio" name="p19" value="D"> D) $2.0	ext{ m}$</label>
+            </div>
+            <div id="feedback19" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 20 -->
+        <div class="question-box" id="qbox-20">
+            <div class="question-text">20. En un gráfico de posición-tiempo para un MRU, un objeto se encuentra en la posición $30	ext{ m}$ en el segundo $0$. En el segundo $2$, su posición es de $15	ext{ m}$. ¿Cuál es su velocidad?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p20" value="A"> A) $-7.5	ext{ m/s}$</label>
+                <label><input type="radio" name="p20" value="B"> B) $7.5	ext{ m/s}$</label>
+                <label><input type="radio" name="p20" value="C"> C) $-15.0	ext{ m/s}$</label>
+                <label><input type="radio" name="p20" value="D"> D) $15.0	ext{ m/s}$</label>
+            </div>
+            <div id="feedback20" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 21 -->
+        <div class="question-box" id="qbox-21">
+            <div class="question-text">21. Un gráfico de posición-tiempo muestra que un objeto está en $x = 15	ext{ m}$ en el segundo $2$, y se mantiene en esa misma posición hasta el segundo $5$. ¿Cuánto tiempo estuvo detenido el móvil y cuál fue su velocidad en ese intervalo?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p21" value="A"> A) Estuvo detenido $5	ext{ s}$ con una velocidad de $15	ext{ m/s}$.</label>
+                <label><input type="radio" name="p21" value="B"> B) Estuvo detenido $3	ext{ s}$ con una velocidad de $0	ext{ m/s}$.</label>
+                <label><input type="radio" name="p21" value="C"> C) Estuvo detenido $3	ext{ s}$ con una velocidad de $5	ext{ m/s}$.</label>
+                <label><input type="radio" name="p21" value="D"> D) No estuvo detenido, avanzó con velocidad constante.</label>
+            </div>
+            <div id="feedback21" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 22 -->
+        <div class="question-box" id="qbox-22">
+            <div class="question-text">22. Si un objeto se mueve hacia la izquierda (sentido negativo, con velocidad inicial de $-10	ext{ m/s}$) y experimenta una aceleración constante hacia la izquierda de $-2	ext{ m/s}^2$, ¿cuál de las siguientes afirmaciones es correcta respecto a su movimiento?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p22" value="A"> A) Es un MRUR porque la aceleración es negativa.</label>
+                <label><input type="radio" name="p22" value="B"> B) Es un MRUA porque la velocidad y la aceleración tienen el mismo signo.</label>
+                <label><input type="radio" name="p22" value="C"> C) Es un MRU porque la velocidad se mantiene en un valor negativo constante.</label>
+                <label><input type="radio" name="p22" value="D"> D) El cuerpo disminuye su velocidad hasta detenerse a los 5 segundos.</label>
+            </div>
+            <div id="feedback22" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 23 -->
+        <div class="question-box" id="qbox-23">
+            <div class="question-text">23. ¿Cuál es la diferencia fundamental en la forma gráfica de la posición en función del tiempo ($x$ v/s $t$) entre un MRU y un MRUA?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p23" value="A"> A) En el MRU es una curva parabólica y en el MRUA es una línea recta diagonal.</label>
+                <label><input type="radio" name="p23" value="B"> B) En el MRU es una línea recta diagonal y en el MRUA es una curva parabólica.</label>
+                <label><input type="radio" name="p23" value="C"> C) En el MRU es una línea horizontal y en el MRUA es una línea vertical.</label>
+                <label><input type="radio" name="p23" value="D"> D) No hay diferencias visuales, ambos se representan con rectas de igual pendiente.</label>
+            </div>
+            <div id="feedback23" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 24 -->
+        <div class="question-box" id="qbox-24">
+            <div class="question-text">24. En un gráfico de velocidad en función del tiempo ($v$ v/s $t$), se observa una recta diagonal descendente que cruza el eje horizontal en el segundo $4$. ¿Qué ocurre físicamente con el móvil en ese segundo exacto?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p24" value="A"> A) El móvil alcanza su velocidad máxima.</label>
+                <label><input type="radio" name="p24" value="B"> B) El móvil se detiene instantáneamente y cambia el sentido de su movimiento.</label>
+                <label><input type="radio" name="p24" value="C"> C) El móvil adquiere una aceleración infinita.</label>
+                <label><input type="radio" name="p24" value="D"> D) El móvil pasa por el origen del sistema de referencia.</label>
+            </div>
+            <div id="feedback24" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 25 -->
+        <div class="question-box" id="qbox-25">
+            <div class="question-text">25. ¿Cuál de las siguientes afirmaciones respecto a la aceleración en los problemas clásicos de la PAES de Física es correcta?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p25" value="A"> A) La aceleración en los gráficos analizados para la PAES cambia aleatoriamente segundo a segundo.</label>
+                <label><input type="radio" name="p25" value="B"> B) Para efectos de la PAES, la aceleración siempre es constante en cada tramo del gráfico (representada por líneas rectas horizontales).</label>
+                <label><input type="radio" name="p25" value="C"> C) La aceleración en un MRU es una constante distinta de cero.</label>
+                <label><input type="radio" name="p25" value="D"> D) El gráfico de aceleración contra el tiempo para el MRUV suele ser una línea recta diagonal.</label>
+            </div>
+            <div id="feedback25" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 26 -->
+        <div class="question-box" id="qbox-26">
+            <div class="question-text">26. En el mundo real y en física, ¿por qué un gráfico de velocidad en función del tiempo ($v$ v/s $t$) NO puede contener líneas verticales (perpendiculares al eje del tiempo)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p26" value="A"> A) Porque el tiempo no puede transcurrir de forma vertical.</label>
+                <label><input type="radio" name="p26" value="B"> B) Porque implicaría que el móvil cambió de velocidad instantáneamente (en cero segundos), lo que exigiría una aceleración infinita.</label>
+                <label><input type="radio" name="p26" value="C"> C) Porque los instrumentos de medición tradicionales no pueden graficar líneas verticales.</label>
+                <label><input type="radio" name="p26" value="D"> D) Porque la prueba PAES solo evalúa movimientos horizontales en el espacio.</label>
+            </div>
+            <div id="feedback26" class="feedback"></div>
+        </div>
+
+
+        <div class="section-title">III. Preguntas Difíciles (27 y 28)</div>
+
+        <!-- Pregunta 27 -->
+        <div class="question-box" id="qbox-27">
+            <div class="question-text">27. Un objeto se mueve según el siguiente gráfico de velocidad-tiempo:<br>
+            • Tramo 1 (0 s a 3 s): Aumenta desde $0	ext{ m/s}$ hasta $6	ext{ m/s}$.<br>
+            • Tramo 2 (3 s a 5 s): Constante de $6	ext{ m/s}$.<br>
+            • Tramo 3 (5 s a 6 s): Disminuye desde $6	ext{ m/s}$ hasta detenerse ($0	ext{ m/s}$).<br>
+            ¿Cuál es la distancia total recorrida y la velocidad promedio?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p27" value="A"> A) Distancia total: $18	ext{ m}$ | Velocidad promedio: $3.0	ext{ m/s}$</label>
+                <label><input type="radio" name="p27" value="B"> B) Distancia total: $24	ext{ m}$ | Velocidad promedio: $4.0	ext{ m/s}$</label>
+                <label><input type="radio" name="p27" value="C"> C) Distancia total: $21	ext{ m}$ | Velocidad promedio: $3.5	ext{ m/s}$</label>
+                <label><input type="radio" name="p27" value="D"> D) Distancia total: $27	ext{ m}$ | Velocidad promedio: $4.5	ext{ m/s}$</label>
+            </div>
+            <div id="feedback27" class="feedback"></div>
+        </div>
+
+        <!-- Pregunta 28 -->
+        <div class="question-box" id="qbox-28">
+            <div class="question-text">28. Considere un objeto lanzado verticalmente hacia arriba (MRUR de subida). ¿Qué características visuales y físicas presenta su curva de posición-tiempo ($x$ v/s $t$) en su punto más alto (altura máxima)?</div>
+            <div class="options-list">
+                <label><input type="radio" name="p28" value="A"> A) Es una recta diagonal de pendiente máxima en ese punto.</label>
+                <label><input type="radio" name="p28" value="B"> B) La curva se vuelve completamente vertical y su velocidad es infinita.</label>
+                <label><input type="radio" name="p28" value="C"> C) La curva se vuelve momentáneamente horizontal en su vértice superior, reflejando que la pendiente (velocidad instantánea) es igual a cero.</label>
+                <label><input type="radio" name="p28" value="D"> D) La curva es una parábola que se hace más empinada, indicando aceleración indefinida.</label>
+            </div>
+            <div id="feedback28" class="feedback"></div>
+        </div>
+
+        <div class="submit-container">
+            <button type="button" class="btn-primary" onclick="verificarCuestionario()">Enviar y Corregir Todo</button>
+        </div>
+    </form>
+
+    <div id="resultadoFinal"></div>
+</div>
+
+<script>
+    const respuestasCorrectas = {
+        p1: 'B', p2: 'C', p3: 'B', p4: 'C', p5: 'B', p6: 'D', p7: 'C', p8: 'B',
+        p9: 'B', p10: 'C', p11: 'B', p12: 'C', p13: 'C', p14: 'C', p15: 'B', p16: 'A',
+        p17: 'B', p18: 'C', p19: 'B', p20: 'A', p21: 'B', p22: 'B', p23: 'B', p24: 'B',
+        p25: 'B', p26: 'B', p27: 'B', p28: 'C'
+    };
+
+    const justificaciones = {
+        p1: "Según se explica en la clase, para la PAES, en el eje horizontal (eje X) se coloca de forma asegurada o muy frecuente el tiempo, mientras que en el eje vertical se analiza posición, velocidad o aceleración.",
+        p2: "Si la línea es horizontal, el valor de la posición no cambia a medida que pasa el tiempo. Físicamente significa que el cuerpo está detenido y su velocidad es cero.",
+        p3: "En un MRU, al recorrer distancias iguales en tiempos iguales, la posición cambia de forma lineal, representándose como una línea recta diagonal.",
+        p4: "En un MRU, la velocidad es constante (no cambia de valor en el tiempo), por lo que se representa como una línea horizontal paralela al eje del tiempo.",
+        p5: "La aceleración es la tasa de cambio de la velocidad. Si la velocidad es constante, la variación es nula y la aceleración es exactamente cero.",
+        p6: "La pendiente de un gráfico posición-tiempo equivale al cambio de posición sobre el cambio de tiempo (Δx / Δt), lo que define matemáticamente la velocidad.",
+        p7: "En un gráfico de velocidad-tiempo, la pendiente equivale al cambio de velocidad sobre el tiempo (Δv / Δt), definición matemática de la aceleración.",
+        p8: "El área bajo la curva en un gráfico de velocidad-tiempo corresponde físicamente al desplazamiento o distancia recorrida por el móvil.",
+        p9: "El signo de la velocidad no representa la intensidad, sino únicamente el sentido del movimiento respecto al sistema de referencia elegido.",
+        p10: "Si la recta se aleja del eje central horizontal, la magnitud de la velocidad está aumentando, lo que define a un movimiento acelerado (MRUA).",
+        p11: "Si la recta se acerca al eje horizontal (v = 0), la velocidad está disminuyendo en magnitud, lo que corresponde a un movimiento retardado (MRUR).",
+        p12: "Debido a que la posición cambia de manera cuadrática con el tiempo en un MRUV, su representación gráfica es una parábola.",
+        p13: "Cuando la velocidad y la aceleración tienen el mismo signo, actúan en el mismo sentido, incrementando la rapidez del objeto (MRUA).",
+        p14: "Velocidad positiva y aceleración negativa actúan en sentidos opuestos, provocando que el cuerpo disminuya su rapidez a razón de 2 m/s cada segundo (frena).",
+        p15: "En un gráfico posición-tiempo, la pendiente es la velocidad instantánea. Si la curva se vuelve más empinada, la velocidad es cada vez mayor (MRUA).",
+        p16: "Un gráfico cinemático no es un mapa o GPS que dibuje el recorrido físico real, sino un ordenamiento matemático abstracto de posición y tiempo.",
+        p17: "Usando la fórmula a = (vf - vi) / (tf - ti) = (10 - 0) / 5 = 2.0 m/s².",
+        p18: "El área es un rectángulo de base 3 s y altura 4 m/s: Área = 3 × 4 = 12 m.",
+        p19: "Se forma un triángulo rectángulo: Área = (base × altura) / 2 = (4 × 8) / 2 = 16 m.",
+        p20: "v = (xf - xi) / (tf - ti) = (15 - 30) / (2 - 0) = -15 / 2 = -7.5 m/s (se devuelve al origen).",
+        p21: "Entre t=2s y t=5s transcurren 3 s y la posición se mantiene en 15 m; el objeto estuvo quieto con velocidad cero.",
+        p22: "Al ser ambos valores negativos, actúan en el mismo sentido, provocando un aumento de rapidez hacia la izquierda (MRUA).",
+        p23: "El MRU genera un cambio lineal (recta diagonal) y el MRUV un cambio cuadrático de la posición (parábola).",
+        p24: "Cruzare el eje horizontal significa que v = 0 (se detiene momentáneamente) y cambia el sentido de su movimiento.",
+        p25: "En la PAES, la aceleración se estudia de manera uniforme por tramos, representada mediante líneas rectas horizontales.",
+        p26: "Una línea vertical implicaría un cambio de velocidad en tiempo cero, lo que exigiría una aceleración infinita, lo cual es físicamente imposible.",
+        p27: "Áreas: Tramo 1 = (3×6)/2 = 9 m; Tramo 2 = 2×6 = 12 m; Tramo 3 = (1×6)/2 = 3 m. Distancia total = 24 m. Velocidad promedio = 24 / 6 = 4.0 m/s.",
+        p28: "En la altura máxima el objeto se detiene instantáneamente (v = 0). En un gráfico posición-tiempo, la pendiente cero se refleja como una curva perfectamente horizontal en su vértice superior."
+    };
+
+    function verificarCuestionario() {
+        let correctasCount = 0;
+        let totalRespondidas = 0;
+
+        for (let i = 1; i <= 28; i++) {
+            const preguntaKey = 'p' + i;
+            const seleccionada = document.querySelector(`input[name="${preguntaKey}"]:checked`);
+            const feedbackDiv = document.getElementById(`feedback${i}`);
+            const boxDiv = document.getElementById(`qbox-${i}`);
+
+            boxDiv.className = "question-box"; // limpiar clases previas
+
+            if (!seleccionada) {
+                feedbackDiv.textContent = "Por favor, selecciona una alternativa.";
+                feedbackDiv.className = "feedback incorrect show";
+                boxDiv.classList.add("incorrect-answered");
+            } else {
+                totalRespondidas++;
+                if (seleccionada.value === respuestasCorrectas[preguntaKey]) {
+                    correctasCount++;
+                    feedbackDiv.textContent = "¡Correcto! " + justificaciones[preguntaKey];
+                    feedbackDiv.className = "feedback correct show";
+                    boxDiv.classList.add("correct-answered");
+                } else {
+                    feedbackDiv.textContent = `Incorrecto. La alternativa correcta es la ${respuestasCorrectas[preguntaKey]}. ${justificaciones[preguntaKey]} (Puedes cambiar tu opción y volver a enviar).`;
+                    feedbackDiv.className = "feedback incorrect show";
+                    boxDiv.classList.add("incorrect-answered");
+                }
+            }
+        }
+
+        const resultadoFinal = document.getElementById('resultadoFinal');
+        resultadoFinal.textContent = `Obtuviste ${correctasCount} de 28 respuestas correctas.`;
+        if (correctasCount === 28) {
+            resultadoFinal.style.backgroundColor = "#e8f5e9";
+            resultadoFinal.style.color = "#2e7d32";
+        } else {
+            resultadoFinal.style.backgroundColor = "#fff3e0";
+            resultadoFinal.style.color = "#e65100";
+        }
+    }
+</script>
+
+</body>
+</html>
